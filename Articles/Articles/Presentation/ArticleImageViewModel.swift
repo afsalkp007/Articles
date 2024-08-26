@@ -1,5 +1,5 @@
 //
-//  ArticlesCellViewModel.swift
+//  ArticleImageViewModel.swift
 //  Articles
 //
 //  Created by Afsal Mohammed on 3/9/22.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct ArticlesCellViewModel {
+struct ArticleImageViewModel {
   var title: String
   var author: String
   var date: String?

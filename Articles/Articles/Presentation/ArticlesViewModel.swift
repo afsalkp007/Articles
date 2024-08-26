@@ -10,17 +10,19 @@ import Foundation
 final class ArticlesViewModel {
   
   private let articlesService: ArticlesLoader
+  private let resource: Resource
   
-  init(articlesService: ArticlesLoader) {
+  init(articlesService: ArticlesLoader, resource: Resource) {
     self.articlesService = articlesService
+    self.resource = resource
   }
   
-  func getArticles(_ completion: @escaping (Result<[ArticlesCellViewModel], Error>) -> Void) {
-    articlesService.fetchArticles(for: .week) { result in
+  func getArticles(_ completion: @escaping (Result<[ArticleImageViewModel], Error>) -> Void) {
+    articlesService.fetchArticles(with: resource) { result in
       switch result {
       case let .success(result):
         guard let articles = result?.articles else { return }
-        completion(.success(articles.compactMap(ArticlesCellViewModel.init)))
+        completion(.success(articles.compactMap(ArticleImageViewModel.init)))
       case let .failure(error):
         completion(.failure(error))
       }

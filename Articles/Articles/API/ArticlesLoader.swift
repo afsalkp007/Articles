@@ -10,5 +10,5 @@ import Foundation
 protocol ArticlesLoader {
   typealias Result = Swift.Result<ArticlesResponse?, Error>
   
-  func fetchArticles(for period: Period, _ completion: @escaping (Result) -> Void)
+  func fetchArticles(with resource: Resource, _ completion: @escaping (Result) -> Void)
 }

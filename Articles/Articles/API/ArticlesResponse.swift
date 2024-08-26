@@ -7,11 +7,9 @@
 
 import Foundation
 
-struct ArticlesResponse {
+struct ArticlesResponse: Decodable {
   var articles: [Article]?
-}
-
-extension ArticlesResponse: Codable {
+  
   enum CodingKeys: String, CodingKey {
     case articles = "results"
   }
@@ -20,12 +18,7 @@ extension ArticlesResponse: Codable {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     articles = try container.decodeValueIfPresent(forKey: .articles)
   }
-  
-  func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(articles, forKey: .articles)
-  }
-  
+    
   static func make(data: Data) -> ArticlesResponse? {
     return try? JSONDecoder().decode(ArticlesResponse.self, from: data)
   }

@@ -7,7 +7,6 @@
 
 import Foundation
 
-// A network resource, identified by url and parameters
 struct Resource {
   let url: URL
   let path: String?

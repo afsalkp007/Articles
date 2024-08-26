@@ -9,9 +9,10 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   var window: UIWindow?
-  
+    
   private lazy var navigationController = UINavigationController(
       rootViewController: ArticlesUIComposer.composed(
+        with:  resource(for: .week),
         selection: showDetail))
   
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -24,8 +25,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     window?.makeKeyAndVisible()
   }
   
-  private func showDetail(with vm: ArticlesCellViewModel) {
+  private func showDetail(with vm: ArticleImageViewModel) {
     let detail = ArticlesDetailUIComposer.composedWith(vm)
     navigationController.pushViewController(detail, animated: true)
+  }
+  
+  private func resource(for period: Period) -> Resource {
+    Resource(
+      url: Constants.Urls.nytMostPopularUrl,
+      path: "svc/mostpopular/v2/mostviewed/all-sections/\(period.rawValue).json",
+      parameters: ["api-key": Constants.APIkey.nyt])
   }
 }

@@ -18,11 +18,7 @@ final class RemoteArticlesLoader: ArticlesLoader {
     case invalidData
   }
   
-  func fetchArticles(for period: Period, _ completion: @escaping (ArticlesLoader.Result) -> Void) {
-    let resource = Resource(
-      url: Constants.Urls.nytMostPopularUrl,
-      path: "svc/mostpopular/v2/mostviewed/all-sections/\(period.rawValue).json",
-      parameters: ["api-key": Constants.APIkey.nyt])
+  func fetchArticles(with resource: Resource, _ completion: @escaping (ArticlesLoader.Result) -> Void) {
     _ = client.fetch(resource: resource) { result in
       DispatchQueue.main.async {
         completion(result.map(ArticlesResponse.make))

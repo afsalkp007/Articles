@@ -9,9 +9,9 @@ import UIKit
 
 final class ArticlesViewController: UITableViewController {
   var viewModel: ArticlesViewModel!
-  private var data = [ArticlesCellViewModel]()
+  private var data = [ArticleImageViewModel]()
   
-  var selection: ((ArticlesCellViewModel) -> Void)?
+  var selection: ((ArticleImageViewModel) -> Void)?
   var viewDidAppear: ((ArticlesViewController) -> Void)?
   
   override func viewDidLoad() {

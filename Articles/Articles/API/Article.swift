@@ -7,15 +7,13 @@
 
 import Foundation
 
-struct Article {
+struct Article: Decodable {
   var title: String
   var author: String
   var date: String?
   var desc: String?
   var media: [Media]?
-}
-
-extension Article: Codable {
+  
   enum CodingKeys: String, CodingKey {
     case title
     case author = "byline"
@@ -32,13 +30,32 @@ extension Article: Codable {
     desc = try container.decodeValueIfPresent(forKey: .desc)
     media = try container.decodeValueIfPresent(forKey: .media)
   }
+}
 
-  func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(title, forKey: .title)
-    try container.encode(author, forKey: .author)
-    try container.encode(date, forKey: .date)
-    try container.encode(desc, forKey: .desc)
-    try container.encode(media, forKey: .media)
+struct Media: Decodable {
+  var metadata: [MetaData]?
+   
+  enum CodingKeys: String, CodingKey {
+    case metadata = "media-metadata"
+  }
+  
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    metadata = try container.decodeValueIfPresent(forKey: .metadata)
   }
 }
+
+struct MetaData: Decodable {
+  var imageUrl: String?
+  
+  enum CodingKeys: String, CodingKey {
+    case imageUrl = "url"
+  }
+  
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    imageUrl = try container.decodeValueIfPresent(forKey: .imageUrl)
+  }
+}
+
+
