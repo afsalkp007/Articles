@@ -117,7 +117,6 @@
 			isa = PBXGroup;
 			children = (
 				F4D65057273852530068A14E /* Configuration */,
-				F45A62EE273848BD00C9E3A2 /* Articles */,
 				F45A6305273848BE00C9E3A2 /* ArticlesTests */,
 				F45A62ED273848BD00C9E3A2 /* Products */,
 				F417F3C1273955C600611687 /* Frameworks */,
@@ -131,20 +130,6 @@
 				F45A6302273848BE00C9E3A2 /* ArticlesTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		F45A62EE273848BD00C9E3A2 /* Articles */ = {
-			isa = PBXGroup;
-			children = (
-				F45A62EF273848BD00C9E3A2 /* AppDelegate.swift */,
-				F476D1B52C7BB3EB00548ED9 /* SceneDelegate.swift */,
-				F4E8DE0C273A767E00482B75 /* ArticlesUIComposer.swift */,
-				F4E8DE0E273A771F00482B75 /* ArticlesDetailUIComposer.swift */,
-				F476D1C52C7C81C700548ED9 /* MainQueueDispatchDecorator.swift */,
-				F45A62F8273848BE00C9E3A2 /* Assets.xcassets */,
-				F476D1C72C7C822000548ED9 /* Modules */,
-			);
-			path = Articles;
 			sourceTree = "<group>";
 		};
 		F45A6305273848BE00C9E3A2 /* ArticlesTests */ = {
@@ -169,6 +154,7 @@
 		F476D1B82C7C6D0000548ED9 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				F4D65063273852BE0068A14E /* ArticleImage.swift */,
 				F4D65069273852BE0068A14E /* ArticlesLoader.swift */,
 			);
 			path = Domain;
@@ -221,7 +207,6 @@
 		F476D1BD2C7C6DEF00548ED9 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				F4D65063273852BE0068A14E /* ArticleImage.swift */,
 				F4D65075273852BE0068A14E /* ArticlesViewModel.swift */,
 			);
 			path = Presentation;
@@ -310,6 +295,13 @@
 				F4993667273981CB007D37A3 /* .gitignore */,
 				F45A62FD273848BE00C9E3A2 /* Info.plist */,
 				F45A62FA273848BE00C9E3A2 /* LaunchScreen.storyboard */,
+				F45A62EF273848BD00C9E3A2 /* AppDelegate.swift */,
+				F476D1B52C7BB3EB00548ED9 /* SceneDelegate.swift */,
+				F4E8DE0C273A767E00482B75 /* ArticlesUIComposer.swift */,
+				F4E8DE0E273A771F00482B75 /* ArticlesDetailUIComposer.swift */,
+				F476D1C52C7C81C700548ED9 /* MainQueueDispatchDecorator.swift */,
+				F45A62F8273848BE00C9E3A2 /* Assets.xcassets */,
+				F476D1C72C7C822000548ED9 /* Modules */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
