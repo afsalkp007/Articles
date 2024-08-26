@@ -22,8 +22,16 @@ final class RemoteArticlesLoader: ArticlesLoader {
   
   func fetchArticles(with resource: Resource, _ completion: @escaping (Result) -> Void) {
     client.get(from: resource) { result in
-      DispatchQueue.main.async {
-        completion(result.map(ArticlesResponse.make))
+      
+      if case let .success((data, response)) = result {
+        guard response.statusCode == 200 else { return }
+        
+        do {
+          let articles = try JSONDecoder().decode(ArticlesResponse.self, from: data)
+          completion(.success(articles))
+        } catch {
+          completion(.failure(error))
+        }
       }
     }
   }

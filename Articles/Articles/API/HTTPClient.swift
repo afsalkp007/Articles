@@ -12,7 +12,7 @@ protocol HTTPClientTask {
 }
 
 protocol HTTPClient {
-  typealias Result = Swift.Result<Data, Error>
+  typealias Result = Swift.Result<(Data, HTTPURLResponse), Error>
 
   @discardableResult
   func get(from resource: Resource, completion: @escaping (Result) -> Void) -> HTTPClientTask?

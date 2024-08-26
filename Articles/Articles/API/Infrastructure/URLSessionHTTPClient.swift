@@ -35,13 +35,13 @@ extension URLSessionHTTPClient {
       return nil
     }
     
-    let task = session.dataTask(with: request, completionHandler: { data, _, error in
-      guard let data = data, error == nil else {
+    let task = session.dataTask(with: request, completionHandler: { data, response, error in
+      guard let data = data, let response = response as? HTTPURLResponse, error == nil else {
         completion(.failure(Error.invalidData))
         return
       }
       
-      completion(.success(data))
+      completion(.success((data, response)))
     })
     
     task.resume()

@@ -18,8 +18,4 @@ struct ArticlesResponse: Decodable {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     articles = try container.decodeValueIfPresent(forKey: .articles)
   }
-    
-  static func make(data: Data) -> ArticlesResponse? {
-    return try? JSONDecoder().decode(ArticlesResponse.self, from: data)
-  }
 }
