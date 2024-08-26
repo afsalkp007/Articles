@@ -10,15 +10,25 @@ import UIKit
 final class ArticlesUIComposer {
   private init() {}
   
-  static func composed(with resource: Resource, selection: @escaping (ArticleImage) -> Void) ->  ArticlesViewController {
+  static func composedWith(
+    loader: ArticlesLoader,
+    selection: @escaping (ArticleImage) -> Void
+  ) ->  ArticlesViewController {
     let storyboard = UIStoryboard(name: "Articles", bundle: nil)
     let vc = storyboard.instantiateInitialViewController() as! ArticlesViewController
-    let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
-    let loader = MainQueueDispatchDecorator(
-      decoratee: RemoteArticlesLoader(client: client))
     
-    vc.viewModel = ArticlesViewModel(articlesService: loader, resource: resource)
+    vc.viewModel = ArticlesViewModel(
+      articlesService: loader,
+      resource: resource(for: .week))
     vc.selection = selection
     return vc
   }
+  
+  private static func resource(for period: Period) -> Resource {
+    Resource(
+      url: Constants.Urls.nytMostPopularUrl,
+      path: "svc/mostpopular/v2/mostviewed/all-sections/\(period.rawValue).json",
+      parameters: ["api-key": Constants.APIkey.nyt])
+  }
 }
+
