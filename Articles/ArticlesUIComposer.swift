@@ -10,7 +10,7 @@ import UIKit
 final class ArticlesUIComposer {
   private init() {}
   
-  static func composed(with resource: Resource, selection: @escaping (ArticleImageViewModel) -> Void) ->  ArticlesViewController {
+  static func composed(with resource: Resource, selection: @escaping (ArticleImage) -> Void) ->  ArticlesViewController {
     let storyboard = UIStoryboard(name: "Articles", bundle: nil)
     let vc = storyboard.instantiateInitialViewController() as! ArticlesViewController
     let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))

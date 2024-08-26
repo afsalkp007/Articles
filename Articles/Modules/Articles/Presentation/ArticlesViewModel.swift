@@ -17,12 +17,12 @@ final class ArticlesViewModel {
     self.resource = resource
   }
   
-  func getArticles(_ completion: @escaping (Result<[ArticleImageViewModel], Error>) -> Void) {
+  func getArticles(_ completion: @escaping (Result<[ArticleImage], Error>) -> Void) {
     articlesService.fetchArticles(with: resource) { result in
       switch result {
       case let .success(result):
         guard let articles = result?.articles else { return }
-        completion(.success(articles.compactMap(ArticleImageViewModel.init)))
+        completion(.success(articles.compactMap(ArticleImage.init)))
       case let .failure(error):
         completion(.failure(error))
       }

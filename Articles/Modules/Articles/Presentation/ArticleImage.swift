@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct ArticleImageViewModel {
+struct ArticleImage {
   var title: String
   var author: String
   var date: String?

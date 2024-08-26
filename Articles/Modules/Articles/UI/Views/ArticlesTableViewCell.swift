@@ -18,7 +18,7 @@ final class ArticlesTableViewCell: UITableViewCell {
     selectionStyle = .none
   }
   
-  func cofigure(with item: ArticleImageViewModel) {
+  func cofigure(with item: ArticleImage) {
     titleLabel.text = item.title
     authorLabel.text = "\(item.author)   \(item.date ?? "")"
     guard let url = item.imageUrl else { return }

@@ -9,7 +9,7 @@ import Foundation
 
 struct ArticlesDetailViewModel {
   
-  let cellViewModel: ArticleImageViewModel
+  let cellViewModel: ArticleImage
   
   var title: String
   var author: String
@@ -17,7 +17,7 @@ struct ArticlesDetailViewModel {
   var desc: String?
   var imageUrl: URL?
   
-  init(cellViewModel: ArticleImageViewModel) {
+  init(cellViewModel: ArticleImage) {
     self.cellViewModel = cellViewModel
     self.title = cellViewModel.title
     self.author = cellViewModel.author

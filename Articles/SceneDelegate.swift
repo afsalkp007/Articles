@@ -25,7 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     window?.makeKeyAndVisible()
   }
   
-  private func showDetail(with vm: ArticleImageViewModel) {
+  private func showDetail(with vm: ArticleImage) {
     let detail = ArticlesDetailUIComposer.composedWith(vm)
     navigationController.pushViewController(detail, animated: true)
   }
