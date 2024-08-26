@@ -18,9 +18,7 @@ final class ArticlesViewController: UITableViewController {
   }
   
   private var data = [ArticleImage]() {
-    didSet {
-      tableView.reloadData()
-    }
+    didSet { tableView.reloadData() }
   }
   
   var selection: ((ArticleImage) -> Void)?
@@ -28,7 +26,6 @@ final class ArticlesViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupUI()
     
     viewDidAppear = { vc in
       vc.viewDidAppear = nil
@@ -40,11 +37,6 @@ final class ArticlesViewController: UITableViewController {
     super.viewIsAppearing(animated)
     
     viewDidAppear?(self)
-  }
-
-  private func setupUI() {
-    title = "Articles"
-    configureTableView()
   }
 
   @IBAction func refresh() {
@@ -59,13 +51,6 @@ final class ArticlesViewController: UITableViewController {
       }
       self?.refreshControl?.endRefreshing()
     }
-  }
-  
-  private func configureTableView() {
-    tableView.delegate = self
-    tableView.dataSource = self
-    tableView.layer.cornerRadius = 0
-    tableView.backgroundColor = UIColor.clear
   }
 }
 

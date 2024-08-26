@@ -21,6 +21,7 @@ final class ArticlesUIComposer {
     })
     
     controller?.selection = selection
+    controller?.title = "Articles"
     return controller!
   }
 }
