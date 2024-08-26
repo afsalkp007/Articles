@@ -18,6 +18,7 @@
 		F45A62FC273848BE00C9E3A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F45A62FA273848BE00C9E3A2 /* LaunchScreen.storyboard */; };
 		F476D1B42C7B6FBA00548ED9 /* ArticlesViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476D1B32C7B6FBA00548ED9 /* ArticlesViewModelTests.swift */; };
 		F476D1B62C7BB3EC00548ED9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476D1B52C7BB3EB00548ED9 /* SceneDelegate.swift */; };
+		F476D1C62C7C81C700548ED9 /* MainQueueDispatchDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476D1C52C7C81C700548ED9 /* MainQueueDispatchDecorator.swift */; };
 		F48A1493274A570100EFDCA7 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A1492274A570100EFDCA7 /* UIImage+Ext.swift */; };
 		F499366627396C94007D37A3 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F499366527396C94007D37A3 /* UITableView+Ext.swift */; };
 		F4993668273981CB007D37A3 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F4993667273981CB007D37A3 /* .gitignore */; };
@@ -67,6 +68,7 @@
 		F45A6308273848BE00C9E3A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F476D1B32C7B6FBA00548ED9 /* ArticlesViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesViewModelTests.swift; sourceTree = "<group>"; };
 		F476D1B52C7BB3EB00548ED9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		F476D1C52C7C81C700548ED9 /* MainQueueDispatchDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueueDispatchDecorator.swift; sourceTree = "<group>"; };
 		F48A1492274A570100EFDCA7 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		F499366527396C94007D37A3 /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		F4993667273981CB007D37A3 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				F476D1B52C7BB3EB00548ED9 /* SceneDelegate.swift */,
 				F4E8DE0C273A767E00482B75 /* ArticlesUIComposer.swift */,
 				F4E8DE0E273A771F00482B75 /* ArticlesDetailUIComposer.swift */,
+				F476D1C52C7C81C700548ED9 /* MainQueueDispatchDecorator.swift */,
 				F476D1BE2C7C6E4800548ED9 /* Detail */,
 				F476D1B72C7C6CF800548ED9 /* Articles */,
 				F45A62F5273848BD00C9E3A2 /* Main.storyboard */,
@@ -428,6 +431,7 @@
 				F4D6507A273852BE0068A14E /* ArticlesLoader.swift in Sources */,
 				F417F3B02739101100611687 /* HTTPClient.swift in Sources */,
 				F4E8DE0F273A771F00482B75 /* ArticlesDetailUIComposer.swift in Sources */,
+				F476D1C62C7C81C700548ED9 /* MainQueueDispatchDecorator.swift in Sources */,
 				F4D65077273852BE0068A14E /* ArticlesTableViewCell.swift in Sources */,
 				F4D65079273852BE0068A14E /* CacheableImageView.swift in Sources */,
 				F4D6505E273852B30068A14E /* KeyedDecodingContainer+Convenience.swift in Sources */,

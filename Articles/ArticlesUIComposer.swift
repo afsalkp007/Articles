@@ -22,23 +22,3 @@ final class ArticlesUIComposer {
     return vc
   }
 }
-
-private final class MainQueueDispatchDecorator: ArticlesLoader {
-  private let decoratee: ArticlesLoader
-  
-  init(decoratee: ArticlesLoader) {
-    self.decoratee = decoratee
-  }
-  
-  func fetchArticles(with resource: Resource, _ completion: @escaping (ArticlesLoader.Result) -> Void) {
-    decoratee.fetchArticles(with: resource) { result in
-      if Thread.isMainThread {
-        completion(result)
-      } else {
-        DispatchQueue.main.async {
-          completion(result)
-        }
-      }
-    }
-  }
-}
