@@ -14,5 +14,6 @@ protocol HTTPClientTask {
 protocol HTTPClient {
   typealias Result = Swift.Result<Data, Error>
 
-  func fetch(resource: Resource, completion: @escaping (Result) -> Void) -> HTTPClientTask?
+  @discardableResult
+  func get(from resource: Resource, completion: @escaping (Result) -> Void) -> HTTPClientTask?
 }

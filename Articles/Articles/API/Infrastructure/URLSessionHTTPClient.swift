@@ -29,7 +29,7 @@ extension URLSessionHTTPClient {
     }
   }
   
-  func fetch(resource: Resource, completion: @escaping (HTTPClient.Result) -> Void) -> HTTPClientTask? {
+  func get(from resource: Resource, completion: @escaping (HTTPClient.Result) -> Void) -> HTTPClientTask? {
     guard let request = makeRequest(resource: resource) else {
       completion(.failure(Error.makeRequestFailed))
       return nil

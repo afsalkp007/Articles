@@ -174,6 +174,7 @@
 		F476D1B82C7C6D0000548ED9 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				F4D65069273852BE0068A14E /* ArticlesLoader.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -191,11 +192,10 @@
 			isa = PBXGroup;
 			children = (
 				F476D1C22C7C706000548ED9 /* Helpers */,
+				F476D1C42C7C745400548ED9 /* Infrastructure */,
+				F476D1C32C7C744500548ED9 /* Request */,
 				F4D6506E273852BE0068A14E /* RemoteArticlesLoader.swift */,
-				F4D65069273852BE0068A14E /* ArticlesLoader.swift */,
 				F417F3AF2739101100611687 /* HTTPClient.swift */,
-				F417F3B12739102700611687 /* Resource.swift */,
-				F417F3B32739106B00611687 /* URLSessionHTTPClient.swift */,
 				F4D6506B273852BE0068A14E /* ArticlesResponse.swift */,
 				F4D6506C273852BE0068A14E /* Article.swift */,
 				F4DFAD7128C4DC1B00302A06 /* Period.swift */,
@@ -261,6 +261,22 @@
 				F4D6505C273852B30068A14E /* KeyedDecodingContainer+Convenience.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F476D1C32C7C744500548ED9 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				F417F3B12739102700611687 /* Resource.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		F476D1C42C7C745400548ED9 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				F417F3B32739106B00611687 /* URLSessionHTTPClient.swift */,
+			);
+			path = Infrastructure;
 			sourceTree = "<group>";
 		};
 		F4D65057273852530068A14E /* Configuration */ = {
