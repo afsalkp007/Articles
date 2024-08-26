@@ -47,7 +47,6 @@ final class ArticlesViewController: UITableViewController {
   }
   
   private func configureTableView() {
-    tableView.register(cellType: ArticlesTableViewCell.self)
     tableView.delegate = self
     tableView.dataSource = self
     tableView.layer.cornerRadius = 0
