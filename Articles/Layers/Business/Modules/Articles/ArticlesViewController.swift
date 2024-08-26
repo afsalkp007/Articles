@@ -7,64 +7,72 @@
 
 import UIKit
 
-final class ArticlesViewController: UIViewController, Storyboarded {
+final class ArticlesViewController: UITableViewController {
+  var viewModel: ArticlesViewModel!
+  private var data = [ArticlesCellViewModel]()
   
-  var coordinator: ArticlesDetailCoordinator?
-  var viewModel: ArticlesViewModel?
-  
-  @IBOutlet weak var tableView: UITableView!
-  var loaderView = UIActivityIndicatorView()
-  private let adapter = Adapter<ArticlesCellViewModel, ArticlesTableViewCell>()
+  var selection: ((ArticlesCellViewModel) -> Void)?
+  var viewDidAppear: ((ArticlesViewController) -> Void)?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
-    setupData()
+    
+    viewDidAppear = { vc in
+      vc.viewDidAppear = nil
+      vc.refresh()
+    }
+  }
+  
+  override func viewIsAppearing(_ animated: Bool) {
+    super.viewIsAppearing(animated)
+    
+    viewDidAppear?(self)
   }
 
   private func setupUI() {
-    setUpLoader()
-    tableView.register(cellType: ArticlesTableViewCell.self)
+    title = "Articles"
+    configureTableView()
   }
 
-  private func setupData() {
-    viewModel?.updateUI = { [weak self] in
-      guard let self = self, let viewModel = self.viewModel else { return }
-      self.title = viewModel.title
-      self.adapter.items = viewModel.viewModels
-      self.configureTableView()
-      self.loaderView.stopAnimating()
+  @IBAction func refresh() {
+    refreshControl?.beginRefreshing()
+    viewModel.getArticles { [weak self] result in
+      if case let .success(viewModels) = result {
+        self?.data = viewModels
+        self?.tableView.reloadData()
+        self?.refreshControl?.endRefreshing()
+      }
     }
   }
   
   private func configureTableView() {
-    adapter.cellHeight = 110
-    tableView.delegate = adapter
-    tableView.dataSource = adapter
+    tableView.register(cellType: ArticlesTableViewCell.self)
+    tableView.delegate = self
+    tableView.dataSource = self
     tableView.layer.cornerRadius = 0
     tableView.backgroundColor = UIColor.clear
-    tableView.tableFooterView = UIView()
-    tableView.reloadData()
-    
-    adapter.configure = { item, cell in
-      cell.titleLabel.text = item.title
-      cell.authorLabel.text = "\(item.author)   \(item.date ?? "")"
-      guard let url = item.imageUrl else { return }
-      cell.articleImageView.setUpLoader()
-      cell.articleImageView.downloadImageFrom(url: url, imageMode: .scaleAspectFit)
-    }
-    
-    adapter.select = { [weak self] viewModel in
-      self?.coordinator?.start(viewModel)
-    }
+  }
+}
+
+extension ArticlesViewController {
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    data.count
   }
   
-  private func setUpLoader() {
-    tableView.addSubview(loaderView)
-    loaderView.hidesWhenStopped = true
-    loaderView.translatesAutoresizingMaskIntoConstraints = false
-    loaderView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
-    loaderView.centerYAnchor.constraint(equalTo: tableView.centerYAnchor).isActive = true
-    loaderView.startAnimating()
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell: ArticlesTableViewCell = tableView.dequeue(indexPath)
+    let model = data[indexPath.row]
+    cell.cofigure(with: model)
+    return cell
+  }
+  
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let viewModel = data[indexPath.row]
+    selection?(viewModel)
+  }
+  
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 110.0
   }
 }

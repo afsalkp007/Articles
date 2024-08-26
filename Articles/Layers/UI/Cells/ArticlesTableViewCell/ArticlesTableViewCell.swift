@@ -17,4 +17,12 @@ final class ArticlesTableViewCell: UITableViewCell {
     super.init(coder: coder)
     selectionStyle = .none
   }
+  
+  func cofigure(with item: ArticlesCellViewModel) {
+    titleLabel.text = item.title
+    authorLabel.text = "\(item.author)   \(item.date ?? "")"
+    guard let url = item.imageUrl else { return }
+    articleImageView.setUpLoader()
+    articleImageView.downloadImageFrom(url: url, imageMode: .scaleAspectFit)
+  }
 }

@@ -1,44 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gWf-MI-puK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RHU-Vc-O3Z">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Articles View Controller-->
-        <scene sceneID="Le1-4m-4r6">
+        <scene sceneID="4iy-OE-jZL">
             <objects>
-                <viewController storyboardIdentifier="ArticlesViewController" id="gWf-MI-puK" customClass="ArticlesViewController" customModule="Articles" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="kCi-Zf-ZVj">
+                <tableViewController storyboardIdentifier="ArticlesViewController" id="RHU-Vc-O3Z" customClass="ArticlesViewController" customModule="Articles" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Uki-ZN-AfJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="7aG-ma-yMq">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="gN8-OR-xy6"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="7aG-ma-yMq" firstAttribute="leading" secondItem="gN8-OR-xy6" secondAttribute="leading" id="Aqo-bF-deM"/>
-                            <constraint firstItem="7aG-ma-yMq" firstAttribute="top" secondItem="gN8-OR-xy6" secondAttribute="top" id="BN3-yc-Xe0"/>
-                            <constraint firstItem="gN8-OR-xy6" firstAttribute="trailing" secondItem="7aG-ma-yMq" secondAttribute="trailing" id="bdP-lT-F6o"/>
-                            <constraint firstItem="gN8-OR-xy6" firstAttribute="bottom" secondItem="7aG-ma-yMq" secondAttribute="bottom" id="g6R-pX-qV1"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="c0z-ge-hrd"/>
-                    <connections>
-                        <outlet property="tableView" destination="7aG-ma-yMq" id="t2X-2g-wYN"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ijg-zK-KRg" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="RHU-Vc-O3Z" id="sOC-Bz-1Wq"/>
+                            <outlet property="delegate" destination="RHU-Vc-O3Z" id="yBv-Ta-4dg"/>
+                        </connections>
+                    </tableView>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="j7h-os-iQg">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refresh" destination="RHU-Vc-O3Z" eventType="valueChanged" id="hMo-Z5-BvD"/>
+                        </connections>
+                    </refreshControl>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MYS-6N-HO0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="984.05797101449286" y="72.991071428571431"/>
+            <point key="canvasLocation" x="1053" y="58"/>
         </scene>
         <!--Articles Detail View Controller-->
         <scene sceneID="cvY-o6-45d">
@@ -49,13 +41,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8gr-Ia-Haf" customClass="CacheableImageView" customModule="Articles" customModuleProvider="target">
-                                <rect key="frame" x="20" y="44" width="374" height="250"/>
+                                <rect key="frame" x="20" y="48" width="374" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="SRj-v5-baD"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4kL-T6-ibW">
-                                <rect key="frame" x="20" y="294" width="374" height="77.5"/>
+                                <rect key="frame" x="20" y="298" width="374" height="77.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F8a-ND-9eu">
                                         <rect key="frame" x="4" y="4" width="366" height="19.5"/>

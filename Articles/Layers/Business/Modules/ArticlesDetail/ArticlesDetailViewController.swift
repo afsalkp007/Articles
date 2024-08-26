@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ArticlesDetailViewController: UIViewController, Storyboarded {
+final class ArticlesDetailViewController: UIViewController {
   
   var viewModel: ArticlesDetailViewModel?
   

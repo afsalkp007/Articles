@@ -9,41 +9,21 @@ import Foundation
 
 final class ArticlesViewModel {
   
-  let articlesService: APIServiceProtocol
-  var updateUI: () -> Void = { }
-  var title = ""
+  private let articlesService: ArticlesLoader
   
-  var viewModels = [ArticlesCellViewModel]() {
-    didSet {
-      updateView()
-      updateUI()
-    }
-  }
-  
-  init(
-    articlesService: APIServiceProtocol = APIService()
-  ) {
+  init(articlesService: ArticlesLoader) {
     self.articlesService = articlesService
-    getArticles()
   }
-
-  func getArticles() {
-    articlesService.fetchArticles(for: .week) { [weak self] result in
+  
+  func getArticles(_ completion: @escaping (Result<[ArticlesCellViewModel], Error>) -> Void) {
+    articlesService.fetchArticles(for: .week) { result in
       switch result {
-      case .success(let results):
-        guard let self = self, let articles = results?.articles else { return }
-        self.viewModels = articles.compactMap(ArticlesCellViewModel.init)
-      case .failure(let error):
-        print(error.localizedDescription)
+      case let .success(result):
+        guard let articles = result?.articles else { return }
+        completion(.success(articles.compactMap(ArticlesCellViewModel.init)))
+      case let .failure(error):
+        completion(.failure(error))
       }
     }
-  }
-  
-  func updateView() {
-    title = "Articles"
-  }
-  
-  func modelFor(indexPath: IndexPath) -> ArticlesCellViewModel {
-    return viewModels[indexPath.row]
   }
 }

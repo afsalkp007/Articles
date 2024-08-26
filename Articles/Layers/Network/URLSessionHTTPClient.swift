@@ -1,5 +1,5 @@
 //
-//  NetworkService.swift
+//  URLSessionHTTPClient.swift
 //  Articles
 //
 //  Created by Afsal Mohammed on 3/9/22.
@@ -7,44 +7,47 @@
 
 import Foundation
 
-/// Used to fetch data from network
-final class NetworkService: Networking {
+final class URLSessionHTTPClient: HTTPClient {
   private let session: URLSession
   
-  init(
-    configuration: URLSessionConfiguration = URLSessionConfiguration.default
-  ) {
-    self.session = URLSession(configuration: configuration)
+  init(session: URLSession) {
+    self.session = session
   }
   
-  @discardableResult
-  func fetch(
-    resource: Resource,
-    completion: @escaping (Data?) -> Void
-  ) -> URLSessionTask? {
+  private enum Error: Swift.Error {
+    case makeRequestFailed
+    case invalidData
+  }
+}
+ 
+extension URLSessionHTTPClient {
+  private struct URLSessionTaskWrapper: HTTPClientTask {
+    let wrapper: URLSessionTask
+    
+    func cancel() {
+      wrapper.cancel()
+    }
+  }
+  
+  func fetch(resource: Resource, completion: @escaping (HTTPClient.Result) -> Void) -> HTTPClientTask? {
     guard let request = makeRequest(resource: resource) else {
-      completion(nil)
+      completion(.failure(Error.makeRequestFailed))
       return nil
     }
     
     let task = session.dataTask(with: request, completionHandler: { data, _, error in
       guard let data = data, error == nil else {
-        completion(nil)
+        completion(.failure(Error.invalidData))
         return
       }
       
-      completion(data)
+      completion(.success(data))
     })
     
     task.resume()
-    return task
+    return URLSessionTaskWrapper(wrapper: task)
   }
   
-  /// Convenient method to make request
-  ///
-  /// - Parameters:
-  ///   - resource: Network resource
-  /// - Returns: Constructed URL request
   private func makeRequest(resource: Resource) -> URLRequest? {
     let url = resource.path.map({ resource.url.appendingPathComponent($0) }) ?? resource.url
     guard var component = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
