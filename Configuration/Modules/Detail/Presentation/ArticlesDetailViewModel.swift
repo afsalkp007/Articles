@@ -22,7 +22,7 @@ struct ArticlesDetailViewModel {
     self.title = cellViewModel.title
     self.author = cellViewModel.author
     self.date = cellViewModel.date
-    self.desc = cellViewModel.desc
+    self.desc = cellViewModel.description
     self.imageUrl = cellViewModel.imageUrl
   }
 }

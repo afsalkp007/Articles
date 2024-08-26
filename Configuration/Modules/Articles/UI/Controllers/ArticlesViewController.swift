@@ -8,8 +8,20 @@
 import UIKit
 
 final class ArticlesViewController: UITableViewController {
-  var viewModel: ArticlesViewModel!
-  private var data = [ArticleImage]()
+  private var loader: ArticlesLoader!
+  private var resource: Resource!
+  
+  convenience init?(coder: NSCoder, loader: ArticlesLoader, resource: Resource) {
+    self.init(coder: coder)
+    self.loader = loader
+    self.resource = resource
+  }
+  
+  private var data = [ArticleImage]() {
+    didSet {
+      tableView.reloadData()
+    }
+  }
   
   var selection: ((ArticleImage) -> Void)?
   var viewDidAppear: ((ArticlesViewController) -> Void)?
@@ -37,12 +49,15 @@ final class ArticlesViewController: UITableViewController {
 
   @IBAction func refresh() {
     refreshControl?.beginRefreshing()
-    viewModel.getArticles { [weak self] result in
-      if case let .success(viewModels) = result {
-        self?.data = viewModels
-        self?.tableView.reloadData()
-        self?.refreshControl?.endRefreshing()
+    loader?.fetchArticles(with: resource) { [weak self] result in
+      switch result {
+      case let .success(images):
+        self?.data = images
+        
+      case let .failure(error):
+        print(error.localizedDescription)
       }
+      self?.refreshControl?.endRefreshing()
     }
   }
   

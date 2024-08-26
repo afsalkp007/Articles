@@ -18,6 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     rootViewController: ArticlesUIComposer.composedWith(
       loader: MainQueueDispatchDecorator(
         decoratee: RemoteArticlesLoader(client: httpClient)),
+      resource: resource(for: .week),
       selection: showDetail)
   )
   
@@ -37,5 +38,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   private func showDetail(with vm: ArticleImage) {
     let detail = ArticlesDetailUIComposer.composedWith(vm)
     navigationController.pushViewController(detail, animated: true)
+  }
+  
+  private func resource(for period: Period) -> Resource {
+    Resource(
+      url: Constants.Urls.nytMostPopularUrl,
+      path: "svc/mostpopular/v2/mostviewed/all-sections/\(period.rawValue).json",
+      parameters: ["api-key": Constants.APIkey.nyt])
   }
 }

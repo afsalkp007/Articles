@@ -27,8 +27,8 @@ final class RemoteArticlesLoader: ArticlesLoader {
         guard response.isOK else { return }
         
         do {
-          let articles = try JSONDecoder().decode(ArticlesResponse.self, from: data)
-          completion(.success(articles))
+          let result = try JSONDecoder().decode(ArticlesResponse.self, from: data)
+          completion(.success(result.images))
         } catch {
           completion(.failure(error))
         }

@@ -12,23 +12,16 @@ final class ArticlesUIComposer {
   
   static func composedWith(
     loader: ArticlesLoader,
+    resource: Resource,
     selection: @escaping (ArticleImage) -> Void
   ) ->  ArticlesViewController {
     let storyboard = UIStoryboard(name: "Articles", bundle: nil)
-    let vc = storyboard.instantiateInitialViewController() as! ArticlesViewController
+    let controller = storyboard.instantiateInitialViewController(creator: { coder in
+      return ArticlesViewController(coder: coder, loader: loader, resource: resource)
+    })
     
-    vc.viewModel = ArticlesViewModel(
-      articlesService: loader,
-      resource: resource(for: .week))
-    vc.selection = selection
-    return vc
-  }
-  
-  private static func resource(for period: Period) -> Resource {
-    Resource(
-      url: Constants.Urls.nytMostPopularUrl,
-      path: "svc/mostpopular/v2/mostviewed/all-sections/\(period.rawValue).json",
-      parameters: ["api-key": Constants.APIkey.nyt])
+    controller?.selection = selection
+    return controller!
   }
 }
 

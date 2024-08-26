@@ -11,15 +11,7 @@ import UIKit
 struct ArticleImage {
   var title: String
   var author: String
-  var date: String?
-  var desc: String?
+  var date: String
+  var description: String
   var imageUrl: URL?
-  
-  init(article: RemoteArticleImage) {
-    self.title = article.title
-    self.author = article.author
-    self.date = article.date
-    self.desc = article.desc
-    self.imageUrl = URL(string: article.media?.first?.metadata?.first?.imageUrl ?? "")
-  }
 }
