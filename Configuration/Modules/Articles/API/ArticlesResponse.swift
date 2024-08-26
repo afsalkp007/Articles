@@ -8,7 +8,7 @@
 import Foundation
 
 struct ArticlesResponse: Decodable {
-  var articles: [Article]?
+  var articles: [RemoteArticleImage]?
   
   enum CodingKeys: String, CodingKey {
     case articles = "results"

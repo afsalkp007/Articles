@@ -15,7 +15,7 @@ struct ArticleImage {
   var desc: String?
   var imageUrl: URL?
   
-  init(article: Article) {
+  init(article: RemoteArticleImage) {
     self.title = article.title
     self.author = article.author
     self.date = article.date

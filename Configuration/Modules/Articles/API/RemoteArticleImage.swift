@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Article: Decodable {
+struct RemoteArticleImage: Decodable {
   var title: String
   var author: String
   var date: String?
@@ -17,7 +17,7 @@ struct Article: Decodable {
   enum CodingKeys: String, CodingKey {
     case title
     case author = "byline"
-    case date = "published_date"
+    case date = "updated"
     case desc = "abstract"
     case media
   }

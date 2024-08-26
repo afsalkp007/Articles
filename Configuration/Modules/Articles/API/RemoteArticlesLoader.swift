@@ -24,7 +24,7 @@ final class RemoteArticlesLoader: ArticlesLoader {
     client.get(from: resource) { result in
       
       if case let .success((data, response)) = result {
-        guard response.statusCode == 200 else { return }
+        guard response.isOK else { return }
         
         do {
           let articles = try JSONDecoder().decode(ArticlesResponse.self, from: data)
@@ -36,4 +36,3 @@ final class RemoteArticlesLoader: ArticlesLoader {
     }
   }
 }
-
