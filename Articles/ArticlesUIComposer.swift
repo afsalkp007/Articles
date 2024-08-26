@@ -11,7 +11,7 @@ final class ArticlesUIComposer {
   private init() {}
   
   static func composed(with resource: Resource, selection: @escaping (ArticleImageViewModel) -> Void) ->  ArticlesViewController {
-    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    let storyboard = UIStoryboard(name: "Articles", bundle: nil)
     let vc = storyboard.instantiateInitialViewController() as! ArticlesViewController
     let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
     let loader = MainQueueDispatchDecorator(

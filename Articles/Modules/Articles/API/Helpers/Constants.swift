@@ -1,11 +1,13 @@
 //
-//  Constants+Urls.swift
+//  Constants.swift
 //  Articles
 //
 //  Created by Afsal Mohammed on 3/9/22
 //
 
 import Foundation
+
+enum Constants {}
 
 extension Constants {
   enum Urls {
