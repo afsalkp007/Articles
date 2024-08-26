@@ -19,7 +19,7 @@ final class RemoteArticlesLoader: ArticlesLoader {
   }
   
   func fetchArticles(with resource: Resource, _ completion: @escaping (ArticlesLoader.Result) -> Void) {
-    _ = client.get(from: resource) { result in
+    client.get(from: resource) { result in
       DispatchQueue.main.async {
         completion(result.map(ArticlesResponse.make))
       }
