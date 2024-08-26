@@ -145,8 +145,7 @@
 				F4E8DE0C273A767E00482B75 /* ArticlesUIComposer.swift */,
 				F4E8DE0E273A771F00482B75 /* ArticlesDetailUIComposer.swift */,
 				F476D1C52C7C81C700548ED9 /* MainQueueDispatchDecorator.swift */,
-				F476D1BE2C7C6E4800548ED9 /* Detail */,
-				F476D1B72C7C6CF800548ED9 /* Articles */,
+				F476D1C72C7C822000548ED9 /* Modules */,
 				F45A62F5273848BD00C9E3A2 /* Main.storyboard */,
 				F4D65059273852B30068A14E /* Core */,
 				F4D65058273852980068A14E /* Resources */,
@@ -280,6 +279,15 @@
 				F417F3B32739106B00611687 /* URLSessionHTTPClient.swift */,
 			);
 			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		F476D1C72C7C822000548ED9 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				F476D1B72C7C6CF800548ED9 /* Articles */,
+				F476D1BE2C7C6E4800548ED9 /* Detail */,
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 		F4D65057273852530068A14E /* Configuration */ = {
