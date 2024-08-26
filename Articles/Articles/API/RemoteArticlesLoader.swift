@@ -10,6 +10,8 @@ import Foundation
 final class RemoteArticlesLoader: ArticlesLoader {
   private let client: HTTPClient
   
+  typealias Result = ArticlesLoader.Result
+  
   init(client: HTTPClient) {
     self.client = client
   }
@@ -18,7 +20,7 @@ final class RemoteArticlesLoader: ArticlesLoader {
     case invalidData
   }
   
-  func fetchArticles(with resource: Resource, _ completion: @escaping (ArticlesLoader.Result) -> Void) {
+  func fetchArticles(with resource: Resource, _ completion: @escaping (Result) -> Void) {
     client.get(from: resource) { result in
       DispatchQueue.main.async {
         completion(result.map(ArticlesResponse.make))
