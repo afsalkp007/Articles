@@ -16,24 +16,26 @@ final class RemoteArticlesLoader: ArticlesLoader {
     self.client = client
   }
   
-  private enum Error: Swift.Error {
+  enum Error: Swift.Error {
     case invalidData
   }
   
   func fetchArticles(with resource: Resource, _ completion: @escaping (Result) -> Void) {
     client.get(from: resource) { result in
-      if case let .success((data, response)) = result {
-        guard response.isOK else { return }
-        
+      
+      switch result  {
+      case let .success((data, response)):
         completion(Self.map(data, response))
+      case .failure:
+        completion(.failure(Error.invalidData))
       }
     }
   }
   
   private static func map(_ data: Data, _ response: HTTPURLResponse) -> Result {
     do {
-      let result = try JSONDecoder().decode(ArticlesResponse.self, from: data)
-      return .success(result.images)
+      let items = try RemoteItemsMapper.map(data, response)
+      return .success(items)
     } catch {
       return .failure(error)
     }

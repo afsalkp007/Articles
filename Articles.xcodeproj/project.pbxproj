@@ -27,7 +27,6 @@
 		F4D65078273852BE0068A14E /* ArticleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D65063273852BE0068A14E /* ArticleImage.swift */; };
 		F4D65079273852BE0068A14E /* CacheableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D65065273852BE0068A14E /* CacheableImageView.swift */; };
 		F4D6507A273852BE0068A14E /* ArticlesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D65069273852BE0068A14E /* ArticlesLoader.swift */; };
-		F4D6507B273852BE0068A14E /* ArticlesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D6506B273852BE0068A14E /* ArticlesResponse.swift */; };
 		F4D6507C273852BE0068A14E /* RemoteArticleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D6506C273852BE0068A14E /* RemoteArticleImage.swift */; };
 		F4D6507D273852BE0068A14E /* RemoteArticlesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D6506E273852BE0068A14E /* RemoteArticlesLoader.swift */; };
 		F4D6507E273852BE0068A14E /* ArticlesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D65072273852BE0068A14E /* ArticlesDetailViewController.swift */; };
@@ -35,6 +34,7 @@
 		F4D65081273852BE0068A14E /* ArticlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D65076273852BE0068A14E /* ArticlesViewController.swift */; };
 		F4DFAD7228C4DC1B00302A06 /* Period.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DFAD7128C4DC1B00302A06 /* Period.swift */; };
 		F4E41C932C7DEAB6006DD62C /* UIStoryboard+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E41C922C7DEAB6006DD62C /* UIStoryboard+Convenience.swift */; };
+		F4E41C952C7DEE01006DD62C /* RemoteItemsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E41C942C7DEE01006DD62C /* RemoteItemsMapper.swift */; };
 		F4E8DE04273A6F7700482B75 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F4E8DE03273A6F7700482B75 /* README.md */; };
 		F4E8DE0D273A767E00482B75 /* ArticlesUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E8DE0C273A767E00482B75 /* ArticlesUIComposer.swift */; };
 		F4E8DE0F273A771F00482B75 /* ArticlesDetailUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E8DE0E273A771F00482B75 /* ArticlesDetailUIComposer.swift */; };
@@ -76,7 +76,6 @@
 		F4D65063273852BE0068A14E /* ArticleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleImage.swift; sourceTree = "<group>"; };
 		F4D65065273852BE0068A14E /* CacheableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheableImageView.swift; sourceTree = "<group>"; };
 		F4D65069273852BE0068A14E /* ArticlesLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesLoader.swift; sourceTree = "<group>"; };
-		F4D6506B273852BE0068A14E /* ArticlesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesResponse.swift; sourceTree = "<group>"; };
 		F4D6506C273852BE0068A14E /* RemoteArticleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteArticleImage.swift; sourceTree = "<group>"; };
 		F4D6506E273852BE0068A14E /* RemoteArticlesLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteArticlesLoader.swift; sourceTree = "<group>"; };
 		F4D65072273852BE0068A14E /* ArticlesDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesDetailViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +83,7 @@
 		F4D65076273852BE0068A14E /* ArticlesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesViewController.swift; sourceTree = "<group>"; };
 		F4DFAD7128C4DC1B00302A06 /* Period.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Period.swift; sourceTree = "<group>"; };
 		F4E41C922C7DEAB6006DD62C /* UIStoryboard+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Convenience.swift"; sourceTree = "<group>"; };
+		F4E41C942C7DEE01006DD62C /* RemoteItemsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteItemsMapper.swift; sourceTree = "<group>"; };
 		F4E8DE03273A6F7700482B75 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		F4E8DE0C273A767E00482B75 /* ArticlesUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesUIComposer.swift; sourceTree = "<group>"; };
 		F4E8DE0E273A771F00482B75 /* ArticlesDetailUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesDetailUIComposer.swift; sourceTree = "<group>"; };
@@ -177,7 +177,7 @@
 				F476D1C42C7C745400548ED9 /* Infrastructure */,
 				F476D1C32C7C744500548ED9 /* Request */,
 				F4D6506E273852BE0068A14E /* RemoteArticlesLoader.swift */,
-				F4D6506B273852BE0068A14E /* ArticlesResponse.swift */,
+				F4E41C942C7DEE01006DD62C /* RemoteItemsMapper.swift */,
 				F417F3AF2739101100611687 /* HTTPClient.swift */,
 				F4D6506C273852BE0068A14E /* RemoteArticleImage.swift */,
 				F4DFAD7128C4DC1B00302A06 /* Period.swift */,
@@ -419,6 +419,7 @@
 				F4D6507F273852BE0068A14E /* ArticlesDetailViewModel.swift in Sources */,
 				F4D6507A273852BE0068A14E /* ArticlesLoader.swift in Sources */,
 				F417F3B02739101100611687 /* HTTPClient.swift in Sources */,
+				F4E41C952C7DEE01006DD62C /* RemoteItemsMapper.swift in Sources */,
 				F4E8DE0F273A771F00482B75 /* ArticlesDetailUIComposer.swift in Sources */,
 				F476D1C62C7C81C700548ED9 /* MainQueueDispatchDecorator.swift in Sources */,
 				F4D65077273852BE0068A14E /* ArticlesTableViewCell.swift in Sources */,
@@ -434,7 +435,6 @@
 				F48A1493274A570100EFDCA7 /* UIImage+Ext.swift in Sources */,
 				F4D6507C273852BE0068A14E /* RemoteArticleImage.swift in Sources */,
 				F4D65078273852BE0068A14E /* ArticleImage.swift in Sources */,
-				F4D6507B273852BE0068A14E /* ArticlesResponse.swift in Sources */,
 				F4E41C932C7DEAB6006DD62C /* UIStoryboard+Convenience.swift in Sources */,
 				F4E8DE0D273A767E00482B75 /* ArticlesUIComposer.swift in Sources */,
 				F4DFAD7228C4DC1B00302A06 /* Period.swift in Sources */,

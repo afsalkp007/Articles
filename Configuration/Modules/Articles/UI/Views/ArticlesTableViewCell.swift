@@ -20,7 +20,7 @@ final class ArticlesTableViewCell: UITableViewCell {
   
   func cofigure(with item: ArticleImage) {
     titleLabel.text = item.title
-    authorLabel.text = "\(item.author)   \(item.date ?? "")"
+    authorLabel.text = "\(item.author)   \(item.date)"
     guard let url = item.imageUrl else { return }
     articleImageView.setUpLoader()
     articleImageView.downloadImageFrom(url: url, imageMode: .scaleAspectFit)
