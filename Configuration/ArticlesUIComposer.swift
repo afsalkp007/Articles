@@ -16,9 +16,9 @@ final class ArticlesUIComposer {
     selection: @escaping (ArticleImage) -> Void
   ) ->  ArticlesViewController {
     let storyboard = UIStoryboard.articles
-    let controller = storyboard.instantiateInitialViewController(creator: { coder in
+    let controller = storyboard.instantiateInitialViewController { coder in
       return ArticlesViewController(coder: coder, loader: loader, resource: resource)
-    })
+    }
     
     controller?.selection = selection
     controller?.title = "Articles"
