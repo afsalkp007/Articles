@@ -8,19 +8,12 @@
 import UIKit
 
 final class CacheableImageView: UIImageView {
-  
-  // MARK: - Constants
-  
+    
   private let imageCache = NSCache<NSString, AnyObject>()
-  
-  // MARK: - Properties
-  
+    
   let activityIndicator = UIActivityIndicatorView()
   
-  func downloadImageFrom(
-    urlString: String,
-    imageMode: UIView.ContentMode
-  ) {
+  func downloadImageFrom(urlString: String, imageMode: UIView.ContentMode) {
     guard let url = URL(string: urlString) else { return }
     downloadImageFrom(url: url, imageMode: imageMode)
   }
@@ -32,11 +25,7 @@ final class CacheableImageView: UIImageView {
     self.activityIndicator.startAnimating()
   }
   
-  func downloadImageFrom(
-    url: URL,
-    imageMode: UIView.ContentMode
-  ) {
-    contentMode = imageMode
+  func downloadImageFrom(url: URL,imageMode: UIView.ContentMode) {
     if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) as? UIImage {
       self.image = cachedImage
     } else {
