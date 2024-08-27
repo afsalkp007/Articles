@@ -9,7 +9,7 @@ import UIKit
 
 final class ArticlesDetailViewController: UIViewController {
   
-  var viewModel: ArticlesDetailViewModel?
+  var model: ArticleImage!
   
   let activityIndicator = UIActivityIndicatorView()
   private let imageCache = NSCache<NSString, AnyObject>()
@@ -24,11 +24,11 @@ final class ArticlesDetailViewController: UIViewController {
   }
   
   private func configureView() {
-    guard let viewModel = viewModel else { return }
-    titleLabel.text = viewModel.title
-    authorLabel.text = "\(viewModel.author)  \(viewModel.date ?? "")"
-    descLabel.text = viewModel.desc ?? ""
-    guard let url = viewModel.imageUrl else { return }
+    guard let model = model else { return }
+    titleLabel.text = model.title
+    authorLabel.text = "\(model.author)  \(model.date)"
+    descLabel.text = model.description
+    guard let url = model.url else { return }
     setUpLoader()
     downloadImageFrom(url: url, imageMode: .scaleToFill)
   }
@@ -37,7 +37,7 @@ final class ArticlesDetailViewController: UIViewController {
     activityIndicator.center = articleImageView.center
     activityIndicator.hidesWhenStopped = true
     articleImageView.addSubview(activityIndicator)
-    self.activityIndicator.startAnimating()
+    activityIndicator.startAnimating()
   }
 
   func downloadImageFrom(url: URL,imageMode: UIView.ContentMode) {

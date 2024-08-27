@@ -31,7 +31,7 @@ final class ArticlesTableViewCell: UITableViewCell {
   func cofigure(with item: ArticleImage) {
     titleLabel.text = item.title
     authorLabel.text = "\(item.author)   \(item.date)"
-    guard let url = item.imageUrl else { return }
+    guard let url = item.url else { return }
     setUpLoader()
     downloadImageFrom(url: url, imageMode: .scaleAspectFit)
   }

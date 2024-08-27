@@ -13,7 +13,7 @@ public final class ArticlesDetailUIComposer {
   static func composedWith(_ model: ArticleImage) -> ArticlesDetailViewController {
     let storyboard = UIStoryboard.detail
     let vc = storyboard.instantiateInitialViewController() as! ArticlesDetailViewController
-    vc.viewModel = ArticlesDetailViewModel(cellViewModel: model)
+    vc.model = model
     return vc
   }
 }

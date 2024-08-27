@@ -50,7 +50,7 @@ private struct MetaData: Decodable {
 
 extension Array where Element == RemoteArticleItem {
   func toModels() -> [ArticleImage] {
-    map { ArticleImage(title: $0.title, author: $0.byline, date: $0.updated, description: $0.abstract, imageUrl: URL(string: $0.url)) }
+    map { ArticleImage(title: $0.title, author: $0.byline, date: $0.updated, description: $0.abstract, url: URL(string: $0.url)) }
   }
 }
 

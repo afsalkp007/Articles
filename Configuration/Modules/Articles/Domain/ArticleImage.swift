@@ -13,5 +13,5 @@ struct ArticleImage {
   var author: String
   var date: String
   var description: String
-  var imageUrl: URL?
+  var url: URL?
 }
