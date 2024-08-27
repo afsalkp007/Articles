@@ -49,15 +49,15 @@ extension URLSessionHTTPClient {
   }
   
   private func makeRequest(resource: Resource) -> URLRequest? {
-    let url = resource.path.map({ resource.url.appendingPathComponent($0) }) ?? resource.url
+    let url = resource.path.map { resource.url.appendingPathComponent($0) } ?? resource.url
     guard var component = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
       assertionFailure()
       return nil
     }
     
-    component.queryItems = resource.parameters.map({
+    component.queryItems = resource.parameters.map {
       return URLQueryItem(name: $0, value: $1)
-    })
+    }
     
     guard let resolvedUrl = component.url else {
       assertionFailure()

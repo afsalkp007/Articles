@@ -11,7 +11,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   var window: UIWindow?
   
   private lazy var httpClient: HTTPClient = {
-    URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+    URLSessionHTTPClient(
+      session: URLSession(configuration: .ephemeral))
   }()
     
   private lazy var navigationController = UINavigationController(

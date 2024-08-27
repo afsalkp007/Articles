@@ -34,6 +34,7 @@
 		F4D6507F273852BE0068A14E /* ArticlesDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D65073273852BE0068A14E /* ArticlesDetailViewModel.swift */; };
 		F4D65081273852BE0068A14E /* ArticlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D65076273852BE0068A14E /* ArticlesViewController.swift */; };
 		F4DFAD7228C4DC1B00302A06 /* Period.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DFAD7128C4DC1B00302A06 /* Period.swift */; };
+		F4E41C932C7DEAB6006DD62C /* UIStoryboard+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E41C922C7DEAB6006DD62C /* UIStoryboard+Convenience.swift */; };
 		F4E8DE04273A6F7700482B75 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F4E8DE03273A6F7700482B75 /* README.md */; };
 		F4E8DE0D273A767E00482B75 /* ArticlesUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E8DE0C273A767E00482B75 /* ArticlesUIComposer.swift */; };
 		F4E8DE0F273A771F00482B75 /* ArticlesDetailUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E8DE0E273A771F00482B75 /* ArticlesDetailUIComposer.swift */; };
@@ -82,6 +83,7 @@
 		F4D65073273852BE0068A14E /* ArticlesDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesDetailViewModel.swift; sourceTree = "<group>"; };
 		F4D65076273852BE0068A14E /* ArticlesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesViewController.swift; sourceTree = "<group>"; };
 		F4DFAD7128C4DC1B00302A06 /* Period.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Period.swift; sourceTree = "<group>"; };
+		F4E41C922C7DEAB6006DD62C /* UIStoryboard+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Convenience.swift"; sourceTree = "<group>"; };
 		F4E8DE03273A6F7700482B75 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		F4E8DE0C273A767E00482B75 /* ArticlesUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesUIComposer.swift; sourceTree = "<group>"; };
 		F4E8DE0E273A771F00482B75 /* ArticlesDetailUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesDetailUIComposer.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 		F4D65057273852530068A14E /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
+				F4E41C912C7DEAA8006DD62C /* Helpers */,
 				F4E8DE03273A6F7700482B75 /* README.md */,
 				F4993667273981CB007D37A3 /* .gitignore */,
 				F45A62FD273848BE00C9E3A2 /* Info.plist */,
@@ -296,6 +299,14 @@
 				F476D1C72C7C822000548ED9 /* Modules */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		F4E41C912C7DEAA8006DD62C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F4E41C922C7DEAB6006DD62C /* UIStoryboard+Convenience.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -424,6 +435,7 @@
 				F4D6507C273852BE0068A14E /* RemoteArticleImage.swift in Sources */,
 				F4D65078273852BE0068A14E /* ArticleImage.swift in Sources */,
 				F4D6507B273852BE0068A14E /* ArticlesResponse.swift in Sources */,
+				F4E41C932C7DEAB6006DD62C /* UIStoryboard+Convenience.swift in Sources */,
 				F4E8DE0D273A767E00482B75 /* ArticlesUIComposer.swift in Sources */,
 				F4DFAD7228C4DC1B00302A06 /* Period.swift in Sources */,
 				F4D6507D273852BE0068A14E /* RemoteArticlesLoader.swift in Sources */,

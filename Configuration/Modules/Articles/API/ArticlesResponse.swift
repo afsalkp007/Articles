@@ -31,7 +31,12 @@ struct ArticlesResponse: Decodable {
     var media: [Media]
     
     var image: ArticleImage {
-      return ArticleImage(title: title, author: author, date: date, description: description, imageUrl: URL(string: media.first?.url ?? ""))
+      return ArticleImage(
+        title: title,
+        author: author,
+        date: date,
+        description: description,
+        imageUrl: URL(string: media.first?.url ?? ""))
     }
     
     enum CodingKeys: String, CodingKey {
@@ -81,5 +86,4 @@ struct ArticlesResponse: Decodable {
       }
     }
   }
-
 }
