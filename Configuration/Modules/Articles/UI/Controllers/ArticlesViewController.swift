@@ -22,13 +22,13 @@ final class ArticlesViewController: UITableViewController {
   }
   
   var selection: ((ArticleImage) -> Void)?
-  var viewDidAppear: ((ArticlesViewController) -> Void)?
+  var viewIsAppearing: ((ArticlesViewController) -> Void)?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    viewDidAppear = { vc in
-      vc.viewDidAppear = nil
+    viewIsAppearing = { vc in
+      vc.viewIsAppearing = nil
       vc.refresh()
     }
   }
@@ -36,7 +36,7 @@ final class ArticlesViewController: UITableViewController {
   override func viewIsAppearing(_ animated: Bool) {
     super.viewIsAppearing(animated)
     
-    viewDidAppear?(self)
+    viewIsAppearing?(self)
   }
 
   @IBAction func refresh() {
