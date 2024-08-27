@@ -22,17 +22,20 @@ final class RemoteArticlesLoader: ArticlesLoader {
   
   func fetchArticles(with resource: Resource, _ completion: @escaping (Result) -> Void) {
     client.get(from: resource) { result in
-      
       if case let .success((data, response)) = result {
         guard response.isOK else { return }
         
-        do {
-          let result = try JSONDecoder().decode(ArticlesResponse.self, from: data)
-          completion(.success(result.images))
-        } catch {
-          completion(.failure(error))
-        }
+        completion(Self.map(data, response))
       }
+    }
+  }
+  
+  private static func map(_ data: Data, _ response: HTTPURLResponse) -> Result {
+    do {
+      let result = try JSONDecoder().decode(ArticlesResponse.self, from: data)
+      return .success(result.images)
+    } catch {
+      return .failure(error)
     }
   }
 }
