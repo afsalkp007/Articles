@@ -16,11 +16,6 @@ final class ArticlesTableViewCell: UITableViewCell {
     
   let activityIndicator = UIActivityIndicatorView()
     
-  required init?(coder: NSCoder) {
-    super.init(coder: coder)
-    selectionStyle = .none
-  }
-  
   func setUpLoader() {
     activityIndicator.center = center
     activityIndicator.hidesWhenStopped = true
