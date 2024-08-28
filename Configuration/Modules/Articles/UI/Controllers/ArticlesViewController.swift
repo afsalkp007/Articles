@@ -9,12 +9,10 @@ import UIKit
 
 final class ArticlesViewController: UITableViewController {
   private var loader: ArticlesLoader!
-  private var resource: Resource!
   
-  convenience init?(coder: NSCoder, loader: ArticlesLoader, resource: Resource) {
+  convenience init?(coder: NSCoder, loader: ArticlesLoader) {
     self.init(coder: coder)
     self.loader = loader
-    self.resource = resource
   }
   
   private var data = [ArticleImage]() {
@@ -41,7 +39,7 @@ final class ArticlesViewController: UITableViewController {
 
   @IBAction func refresh() {
     refreshControl?.beginRefreshing()
-    loader?.fetchArticles(with: resource) { [weak self] result in
+    loader?.fetchArticles { [weak self] result in
       switch result {
       case let .success(images):
         self?.data = images

@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct Resource {
-  let url: URL
-  let path: String?
-  let httpMethod: String
-  let parameters: [String: String]
-  let headers: [String: String]
+public struct Resource {
+  public let url: URL
+  public let path: String?
+  public let httpMethod: String
+  public let parameters: [String: String]
+  public let headers: [String: String]
   
-  init(
+  public init(
     url: URL,
     path: String? = nil,
     httpMethod: String = "GET",

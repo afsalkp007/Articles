@@ -24,8 +24,8 @@ final class MainQueueDispatchDecorator<T> {
 }
  
 extension MainQueueDispatchDecorator: ArticlesLoader where T: ArticlesLoader {
-  func fetchArticles(with resource: Resource, _ completion: @escaping (ArticlesLoader.Result) -> Void) {
-    decoratee.fetchArticles(with: resource) { [weak self] result in
+  func fetchArticles(completion: @escaping (ArticlesLoader.Result) -> Void) {
+    decoratee.fetchArticles { [weak self] result in
       guard let self = self else { return }
       
       self.action { completion(result) }

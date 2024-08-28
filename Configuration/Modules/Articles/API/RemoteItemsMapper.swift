@@ -9,11 +9,12 @@ import Foundation
 
 final class RemoteItemsMapper {
   static func map(_ data: Data, _ response: HTTPURLResponse) throws -> [ArticleImage] {
-    guard let result = try? JSONDecoder().decode(Articles.self, from: data), response.isOK else {
+    do {
+      let result = try JSONDecoder().decode(Articles.self, from: data)
+      return result.results.toModels()
+    } catch {
       throw RemoteArticlesLoader.Error.invalidData
     }
-    
-    return result.results.toModels()
   }
 }
 
@@ -29,6 +30,23 @@ private struct RemoteArticleItem: Decodable {
   let media: [Media]
   
   var url: String { media.first?.metadata.first?.url ?? "" }
+  
+  enum CodingKeys: String, CodingKey {
+    case title
+    case byline
+    case updated
+    case abstract
+    case media
+  }
+  
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    title = try container.decodeValue(forKey: .title)
+    byline = try container.decodeValue(forKey: .byline)
+    updated = try container.decodeValue(forKey: .updated)
+    abstract = try container.decodeValue(forKey: .abstract)
+    media = try container.decodeValue(forKey: .media)
+  }
 }
 
 private struct Media: Decodable {
@@ -46,6 +64,15 @@ private struct Media: Decodable {
 
 private struct MetaData: Decodable {
   let url: String?
+  
+  enum CodingKeys: String, CodingKey {
+    case url
+  }
+  
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    url = try container.decodeValue(forKey: .url)
+  }
 }
 
 extension Array where Element == RemoteArticleItem {

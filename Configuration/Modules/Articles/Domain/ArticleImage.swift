@@ -8,10 +8,18 @@
 import Foundation
 import UIKit
 
-struct ArticleImage {
-  var title: String
-  var author: String
-  var date: String
-  var description: String
-  var url: URL?
+public struct ArticleImage: Equatable {
+  public let title: String
+  public let author: String
+  public let date: String
+  public let description: String
+  public let url: URL?
+  
+  public init(title: String, author: String, date: String, description: String, url: URL? = nil) {
+    self.title = title
+    self.author = author
+    self.date = date
+    self.description = description
+    self.url = url
+  }
 }

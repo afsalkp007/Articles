@@ -7,27 +7,30 @@
 
 import Foundation
 
-final class RemoteArticlesLoader: ArticlesLoader {
+public final class RemoteArticlesLoader: ArticlesLoader {
+  private let resource: Resource
   private let client: HTTPClient
   
-  typealias Result = ArticlesLoader.Result
+  public typealias Result = ArticlesLoader.Result
   
-  init(client: HTTPClient) {
+  public init(resource: Resource, client: HTTPClient) {
+    self.resource = resource
     self.client = client
   }
   
-  enum Error: Swift.Error {
+  public enum Error: Swift.Error {
+    case connectivity
     case invalidData
   }
   
-  func fetchArticles(with resource: Resource, _ completion: @escaping (Result) -> Void) {
+  public func fetchArticles(completion: @escaping (Result) -> Void) {
     client.get(from: resource) { result in
       
       switch result  {
       case let .success((data, response)):
         completion(Self.map(data, response))
       case .failure:
-        completion(.failure(Error.invalidData))
+        completion(.failure(Error.connectivity))
       }
     }
   }

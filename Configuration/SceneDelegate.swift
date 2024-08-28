@@ -18,9 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   private lazy var navigationController = UINavigationController(
     rootViewController: ArticlesUIComposer.composedWith(
       loader: MainQueueDispatchDecorator(
-        decoratee: RemoteArticlesLoader(client: httpClient)),
-      resource: resource(for: .week),
-      selection: showDetail)
+        decoratee: RemoteArticlesLoader(
+          resource: resource(for: .week),
+          client: httpClient)),
+      selection: showDetail
+    )
   )
   
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

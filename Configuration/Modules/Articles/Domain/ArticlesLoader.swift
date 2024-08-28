@@ -7,8 +7,8 @@
 
 import Foundation
 
-protocol ArticlesLoader {
+public protocol ArticlesLoader {
   typealias Result = Swift.Result<[ArticleImage], Error>
   
-  func fetchArticles(with resource: Resource, _ completion: @escaping (Result) -> Void)
+  func fetchArticles(completion: @escaping (Result) -> Void)
 }
