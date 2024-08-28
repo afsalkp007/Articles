@@ -78,15 +78,33 @@ class RemoteArticlesLoaderTests: XCTestCase {
   
   // MARK: - HTTPCientSpy
   
-  private func makeSUT(url: URL = URL(string: "http://any-url.com")!) -> (sut: RemoteArticlesLoader, client: HTTPCientSpy) {
+  private func makeSUT(
+    url: URL = URL(string: "http://any-url.com")!,
+    file: StaticString = #filePath,
+    line: UInt = #line
+  ) -> (sut: RemoteArticlesLoader, client: HTTPCientSpy) {
     let client = HTTPCientSpy()
     let url = URL(string: "http://any-url.com")!
     let resource = Resource(url: url)
     let sut = RemoteArticlesLoader(resource: resource, client: client)
+    trackForMemoryLeak(sut, file: file, line: line)
+    trackForMemoryLeak(client, file: file, line: line)
     return (sut, client)
   }
   
-  private func makeItem(title: String, author: String, date: String, description: String, url: URL? = URL(string: "http://any-url.com")) -> (model: ArticleImage, json: [String: Any]) {
+  private func trackForMemoryLeak(_ instance: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
+    addTeardownBlock { [weak instance] in
+      XCTAssertNil(instance, file: file, line: line)
+    }
+  }
+  
+  private func makeItem(
+    title: String,
+    author: String,
+    date: String,
+    description: String,
+    url: URL? = URL(string: "http://any-url.com")
+  ) -> (model: ArticleImage, json: [String: Any]) {
     let item = ArticleImage(title: title, author: author, date: date, description: description, url: url)
     let json = [
       "title": item.title,
@@ -98,7 +116,13 @@ class RemoteArticlesLoaderTests: XCTestCase {
     return (item, json)
   }
   
-  private func expect(_ sut: RemoteArticlesLoader, toCompleteWith expectedResult: RemoteArticlesLoader.Result, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
+  private func expect(
+    _ sut: RemoteArticlesLoader,
+    toCompleteWith expectedResult: RemoteArticlesLoader.Result,
+    when action: () -> Void,
+    file: StaticString = #filePath,
+    line: UInt = #line
+  ) {
     
     sut.fetchArticles { receivedResult in
       switch (receivedResult, expectedResult) {
