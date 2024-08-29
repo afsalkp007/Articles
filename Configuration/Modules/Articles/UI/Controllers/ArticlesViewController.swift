@@ -15,11 +15,11 @@ final class ArticlesViewController: UITableViewController {
     self.loader = loader
   }
   
-  private var data = [ArticleImage]() {
+  private var data = [ArticleImageViewModel]() {
     didSet { tableView.reloadData() }
   }
   
-  var selection: ((ArticleImage) -> Void)?
+  var selection: ((ArticleImageViewModel) -> Void)?
   var viewIsAppearing: ((ArticlesViewController) -> Void)?
   
   override func viewDidLoad() {
@@ -39,10 +39,10 @@ final class ArticlesViewController: UITableViewController {
 
   @IBAction func refresh() {
     refreshControl?.beginRefreshing()
-    loader?.fetchArticles { [weak self] result in
+    loader.fetchArticles { [weak self] result in
       switch result {
       case let .success(images):
-        self?.data = images
+        self?.data = images.map(ArticleImageViewModel.init)
         
       case let .failure(error):
         print(error.localizedDescription)

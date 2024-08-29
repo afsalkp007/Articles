@@ -9,7 +9,7 @@ import UIKit
 
 final class ArticlesDetailViewController: UIViewController {
   
-  var model: ArticleImage!
+  var model: ArticleImageViewModel!
   
   private let imageCache = NSCache<NSString, AnyObject>()
   

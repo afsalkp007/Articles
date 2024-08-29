@@ -11,11 +11,17 @@ import UIKit
 public struct ArticleImage: Equatable {
   public let title: String
   public let author: String
-  public let date: String
+  public let date: Date
   public let description: String
   public let url: URL?
   
-  public init(title: String, author: String, date: String, description: String, url: URL? = nil) {
+  public init(
+    title: String,
+    author: String,
+    date: Date,
+    description: String,
+    url: URL? = nil
+  ) {
     self.title = title
     self.author = author
     self.date = date

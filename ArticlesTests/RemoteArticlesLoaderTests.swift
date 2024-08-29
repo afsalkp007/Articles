@@ -48,32 +48,26 @@ class RemoteArticlesLoaderTests: XCTestCase {
     })
   }
   
-  func test_fetch_deliversItemsOn200HTTPResponseWithJSONItems() {
-    let (sut, client) = makeSUT()
-    
+  func test_fetch_deliversItemsOn200HTTPResponseWithJSONItems() throws {
     let item1 = makeItem(
       title: "any title",
       author: "any author",
-      date: "any date",
+      date: (Date(timeIntervalSince1970: 1567019522), "2019-08-28 19:12:02"),
       description: "any description",
       url: URL(string: "http://any-url.com"))
     
     let item2 = makeItem(
       title: "another title",
       author: "another author",
-      date: "another date",
+      date: (Date(timeIntervalSince1970: 1253575474), "2009-09-21 23:24:34"),
       description: "another description",
       url: URL(string: "http://another-url.com"))
     
-    let items = [item1.model, item2.model]
-    let itemsJSON = [
-      "results": [item1.json, item2.json]
-    ]
+    let json = makeItemJSON(items: [item1.json, item2.json])
     
-    expect(sut, toCompleteWith: .success(items), when: {
-      let json = try! JSONSerialization.data(withJSONObject: itemsJSON)
-      client.complete(withStatusCode: 200, data: json)
-    })
+    let result = try RemoteItemsMapper.map(json, HTTPURLResponse(statusCode: 200))
+    
+    XCTAssertEqual(result, [item1.model, item2.model])
   }
   
   // MARK: - HTTPCientSpy
@@ -92,6 +86,11 @@ class RemoteArticlesLoaderTests: XCTestCase {
     return (sut, client)
   }
   
+  private func makeItemJSON(items: [[String: Any]]) -> Data {
+    let json = ["results": items]
+    return try! JSONSerialization.data(withJSONObject: json)
+  }
+  
   private func trackForMemoryLeak(_ instance: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
     addTeardownBlock { [weak instance] in
       XCTAssertNil(instance, file: file, line: line)
@@ -101,17 +100,23 @@ class RemoteArticlesLoaderTests: XCTestCase {
   private func makeItem(
     title: String,
     author: String,
-    date: String,
+    date: (date: Date, formatted: String),
     description: String,
     url: URL? = URL(string: "http://any-url.com")
   ) -> (model: ArticleImage, json: [String: Any]) {
-    let item = ArticleImage(title: title, author: author, date: date, description: description, url: url)
+    let item = ArticleImage(
+      title: title,
+      author: author,
+      date: date.date,
+      description: description,
+      url: url)
+    
     let json = [
-      "title": item.title,
-      "byline": item.author,
-      "updated": item.date,
-      "abstract": item.description,
-      "media": [["media-metadata": [["url": item.url?.absoluteString]]]]
+      "title": title,
+      "byline": author,
+      "updated": date.formatted,
+      "abstract": description,
+      "media": [["media-metadata": [["url": url?.absoluteString]]]]
     ].compactMapValues { $0 }
     return (item, json)
   }
@@ -170,5 +175,19 @@ class RemoteArticlesLoaderTests: XCTestCase {
   private func anyNSError() -> NSError {
     return NSError(domain: "any error", code: 0)
   }
+}
+
+private extension HTTPURLResponse {
+  convenience init(statusCode code: Int) {
+    self.init(
+      url: anyURL(),
+      statusCode: code,
+      httpVersion: nil,
+      headerFields: nil)!
+  }
+}
+
+func anyURL() -> URL {
+  return URL(string: "http://any-url.com")!
 }
 

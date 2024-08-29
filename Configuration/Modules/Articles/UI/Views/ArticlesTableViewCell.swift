@@ -10,13 +10,15 @@ import UIKit
 final class ArticlesTableViewCell: UITableViewCell {
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var authorLabel: UILabel!
+  @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var articleImageView: UIImageView!
   
   private let imageCache = NSCache<NSString, AnyObject>()
     
-  func cofigure(with item: ArticleImage) {
+  func cofigure(with item: ArticleImageViewModel) {
     titleLabel.text = item.title
-    authorLabel.text = "\(item.author)   \(item.date)"
+    authorLabel.text = item.author
+    dateLabel.text = item.date
     guard let url = item.url else { return }
     downloadImageFrom(url: url, imageMode: .scaleAspectFit)
   }

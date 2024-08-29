@@ -7,14 +7,24 @@
 
 import Foundation
 
-final class RemoteItemsMapper {
-  static func map(_ data: Data, _ response: HTTPURLResponse) throws -> [ArticleImage] {
+public final class RemoteItemsMapper {
+  public static func map(_ data: Data, _ response: HTTPURLResponse) throws -> [ArticleImage] {
     do {
-      let result = try JSONDecoder().decode(Articles.self, from: data)
+      let decoder = JSONDecoder()
+      decoder.dateDecodingStrategy = decodeDate(with: "yyyy-MM-d H:mm:ss")
+
+      let result = try decoder.decode(Articles.self, from: data)
       return result.results.toModels()
     } catch {
       throw RemoteArticlesLoader.Error.invalidData
     }
+  }
+  
+  private static func decodeDate(with format: String) -> JSONDecoder.DateDecodingStrategy {
+    let formatter = DateFormatter()
+    formatter.dateFormat = format
+    formatter.timeZone = TimeZone(secondsFromGMT: 0)
+    return .formatted(formatter)
   }
 }
 
@@ -25,7 +35,7 @@ private struct Articles: Decodable {
 private struct RemoteArticleItem: Decodable {
   let title: String
   let byline: String
-  let updated: String
+  let updated: Date
   let abstract: String
   let media: [Media]
   

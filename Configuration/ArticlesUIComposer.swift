@@ -12,7 +12,7 @@ final class ArticlesUIComposer {
   
   static func composedWith(
     loader: ArticlesLoader,
-    selection: @escaping (ArticleImage) -> Void
+    selection: @escaping (ArticleImageViewModel) -> Void
   ) ->  ArticlesViewController {
     let storyboard = UIStoryboard.articles
     let controller = storyboard.instantiateInitialViewController { coder in
