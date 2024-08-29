@@ -24,7 +24,8 @@ public final class RemoteArticlesLoader: ArticlesLoader {
   }
   
   public func fetchArticles(completion: @escaping (Result) -> Void) {
-    client.get(from: resource) { result in
+    client.get(from: resource) { [weak self] result in
+      guard self != nil else { return }
       
       switch result  {
       case let .success((data, response)):
