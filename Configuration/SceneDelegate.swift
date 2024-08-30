@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     rootViewController: ArticlesUIComposer.composedWith(
       loader: MainQueueDispatchDecorator(
         decoratee: RemoteArticlesLoader(
-          resource: resource(for: .week),
+          resource: resource(),
           client: httpClient)),
       selection: showDetail
     )
@@ -43,10 +43,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     navigationController.pushViewController(detail, animated: true)
   }
   
-  private func resource(for period: Period) -> Resource {
+  private func resource() -> Resource {
     Resource(
       url: Constants.Urls.nytMostPopularUrl,
-      path: "svc/mostpopular/v2/mostviewed/all-sections/\(period.rawValue).json",
+      path: "svc/mostpopular/v2/mostviewed/all-sections/7.json",
       parameters: ["api-key": Constants.APIkey.nyt])
   }
 }
