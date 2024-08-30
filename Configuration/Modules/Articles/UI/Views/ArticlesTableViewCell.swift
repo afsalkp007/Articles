@@ -24,11 +24,13 @@ final class ArticlesTableViewCell: UITableViewCell {
     if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) as? UIImage {
       articleImageView.image = cachedImage
     } else {
-      viewModel.getImageData(with: url) { data in
-        DispatchQueue.main.async {
+      viewModel.getImageData { result in
+        if case let .success(data) = result {
+          DispatchQueue.main.async {
           let imageToCache = UIImage(data: data)?.resizeImage(with: CGSize(width: 101.0, height: 101.0))
           self.imageCache.setObject(imageToCache!, forKey: url.absoluteString as NSString)
-          self.articleImageView.image = imageToCache
+            self.articleImageView.image = imageToCache
+          }
         }
       }
     }

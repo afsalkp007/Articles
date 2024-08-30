@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gKi-Y2-20e" customClass="CacheableImageView" customModule="Articles" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gKi-Y2-20e">
                                 <rect key="frame" x="20" y="59" width="353" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="w4K-os-bIO"/>
@@ -59,7 +59,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="5c5-D1-KqR"/>
                     <connections>
-                        <outlet property="articleImageView" destination="gKi-Y2-20e" id="63Y-fg-pZH"/>
+                        <outlet property="articleImageView" destination="gKi-Y2-20e" id="mpX-zH-tH6"/>
                         <outlet property="authorLabel" destination="2u4-eQ-LiY" id="Ut3-hy-QF9"/>
                         <outlet property="descLabel" destination="iEI-F6-EjL" id="zrA-8T-zeL"/>
                         <outlet property="titleLabel" destination="c8r-cc-dxv" id="b9a-IB-1mk"/>

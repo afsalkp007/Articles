@@ -22,6 +22,8 @@
 		F48A1493274A570100EFDCA7 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48A1492274A570100EFDCA7 /* UIImage+Ext.swift */; };
 		F499366627396C94007D37A3 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F499366527396C94007D37A3 /* UITableView+Ext.swift */; };
 		F4993668273981CB007D37A3 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F4993667273981CB007D37A3 /* .gitignore */; };
+		F49B846E2C82561600E9AE4F /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B846D2C82561600E9AE4F /* ImageLoader.swift */; };
+		F49B84702C82562E00E9AE4F /* RemoteImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49B846F2C82562E00E9AE4F /* RemoteImageLoader.swift */; };
 		F4AC4E2A2C7F439A007731E2 /* RemoteArticlesLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AC4E292C7F439A007731E2 /* RemoteArticlesLoaderTests.swift */; };
 		F4BD13312C8072FF00D84E6D /* ArticleImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BD13302C8072FF00D84E6D /* ArticleImageViewModel.swift */; };
 		F4C89B402C80918A00EA26DC /* XCTest+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C89B3F2C80918A00EA26DC /* XCTest+MemoryLeakTracking.swift */; };
@@ -73,6 +75,8 @@
 		F48A1492274A570100EFDCA7 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		F499366527396C94007D37A3 /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		F4993667273981CB007D37A3 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		F49B846D2C82561600E9AE4F /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		F49B846F2C82562E00E9AE4F /* RemoteImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageLoader.swift; sourceTree = "<group>"; };
 		F4AC4E292C7F439A007731E2 /* RemoteArticlesLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteArticlesLoaderTests.swift; sourceTree = "<group>"; };
 		F4BD13302C8072FF00D84E6D /* ArticleImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleImageViewModel.swift; sourceTree = "<group>"; };
 		F4C89B3F2C80918A00EA26DC /* XCTest+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 			children = (
 				F4D65063273852BE0068A14E /* ArticleImage.swift */,
 				F4D65069273852BE0068A14E /* ArticlesLoader.swift */,
+				F49B846D2C82561600E9AE4F /* ImageLoader.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -184,6 +189,7 @@
 				F476D1C42C7C745400548ED9 /* Infrastructure */,
 				F476D1C32C7C744500548ED9 /* Request */,
 				F4D6506E273852BE0068A14E /* RemoteArticlesLoader.swift */,
+				F49B846F2C82562E00E9AE4F /* RemoteImageLoader.swift */,
 				F4E41C942C7DEE01006DD62C /* RemoteItemsMapper.swift */,
 				F417F3AF2739101100611687 /* HTTPClient.swift */,
 				F4DFAD7128C4DC1B00302A06 /* Period.swift */,
@@ -435,6 +441,7 @@
 				F4E41C952C7DEE01006DD62C /* RemoteItemsMapper.swift in Sources */,
 				F4E8DE0F273A771F00482B75 /* ArticlesDetailUIComposer.swift in Sources */,
 				F4BD13312C8072FF00D84E6D /* ArticleImageViewModel.swift in Sources */,
+				F49B84702C82562E00E9AE4F /* RemoteImageLoader.swift in Sources */,
 				F476D1C62C7C81C700548ED9 /* MainQueueDispatchDecorator.swift in Sources */,
 				F4D65077273852BE0068A14E /* ArticlesTableViewCell.swift in Sources */,
 				F4D6505E273852B30068A14E /* KeyedDecodingContainer+Convenience.swift in Sources */,
@@ -442,6 +449,7 @@
 				F45A62F0273848BD00C9E3A2 /* AppDelegate.swift in Sources */,
 				F417F3B42739106B00611687 /* URLSessionHTTPClient.swift in Sources */,
 				F417F3B62739128A00611687 /* Constants.swift in Sources */,
+				F49B846E2C82561600E9AE4F /* ImageLoader.swift in Sources */,
 				F4D65081273852BE0068A14E /* ArticlesViewController.swift in Sources */,
 				F417F3B22739102700611687 /* Resource.swift in Sources */,
 				F476D1CD2C7C9AEA00548ED9 /* HTTPURLResponse+StatusCode.swift in Sources */,

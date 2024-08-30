@@ -10,10 +10,10 @@ import UIKit
 public final class ArticlesDetailUIComposer {
   private init() {}
   
-  static func composedWith(_ model: ArticleImageViewModel) -> ArticlesDetailViewController {
+  static func composedWith(_ viewModel: ArticleImageViewModel) -> ArticlesDetailViewController {
     let storyboard = UIStoryboard.detail
     let vc = storyboard.instantiateInitialViewController() as! ArticlesDetailViewController
-    vc.model = model
+    vc.viewModel = viewModel
     return vc
   }
 }

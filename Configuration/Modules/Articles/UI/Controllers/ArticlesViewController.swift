@@ -42,7 +42,7 @@ final class ArticlesViewController: UITableViewController {
     loader.fetchArticles { [weak self] result in
       switch result {
       case let .success(images):
-        self?.data = images.map(ArticleImageViewModel.init)
+        self?.data = images.map { ArticleImageViewModel(image: $0, loader: RemoteImageLoader(url: $0.url!, client: URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))))}
         
       case let .failure(error):
         print(error.localizedDescription)

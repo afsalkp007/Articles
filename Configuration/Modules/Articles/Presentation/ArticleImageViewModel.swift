@@ -9,9 +9,13 @@ import Foundation
 
 struct ArticleImageViewModel {
   public let image: ArticleImage
+  private let loader: ImageLoader
+  
+  typealias Result = Swift.Result<Data, Error>
 
-  init(image: ArticleImage) {
+  init(image: ArticleImage, loader: ImageLoader) {
     self.image = image
+    self.loader = loader
   }
   
   func relativeDate(
@@ -25,10 +29,7 @@ struct ArticleImageViewModel {
     return formatter.localizedString(for: image.date, relativeTo: currentDate)
   }
   
-  func getImageData(with url: URL, completion: @escaping (Data) -> Void) {
-    URLSession.shared.dataTask(with: url) { data, response, error in
-      guard let data = data, error == nil else { return }
-        completion(data)
-    }.resume()
+  func getImageData(completion: @escaping (Result) -> Void) {
+    loader.loadImageData(completion: completion)
   }
 }
