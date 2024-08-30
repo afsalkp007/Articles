@@ -40,15 +40,28 @@ final class ArticlesViewController: UITableViewController {
   @IBAction func refresh() {
     refreshControl?.beginRefreshing()
     loader.fetchArticles { [weak self] result in
+      guard let self = self else { return }
+      
       switch result {
       case let .success(images):
-        self?.data = images.map { ArticleImageViewModel(image: $0, loader: RemoteImageLoader(url: $0.url!, client: URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))))}
+        self.data = images.map(self.getTableData)
         
       case let .failure(error):
         print(error.localizedDescription)
       }
-      self?.refreshControl?.endRefreshing()
+      self.refreshControl?.endRefreshing()
     }
+  }
+  
+  private func getTableData(for image: ArticleImage) -> ArticleImageViewModel {
+    return ArticleImageViewModel(
+      image: image,
+      loader: RemoteImageLoader(
+        url: image.url!,
+        client: URLSessionHTTPClient(
+          session: URLSession(configuration: .ephemeral))
+      )
+    )
   }
 }
 
