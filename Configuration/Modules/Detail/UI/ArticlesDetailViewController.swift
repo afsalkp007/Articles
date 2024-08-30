@@ -24,25 +24,21 @@ final class ArticlesDetailViewController: UIViewController {
   
   private func configureView() {
     guard let model = model else { return }
-    titleLabel.text = model.title
-    authorLabel.text = "\(model.author)  \(model.date)"
-    descLabel.text = model.description
-    guard let url = model.url else { return }
-    downloadImageFrom(url: url, imageMode: .scaleToFill)
-  }
-  
-  func downloadImageFrom(url: URL,imageMode: UIView.ContentMode) {
+    titleLabel.text = model.image.title
+    authorLabel.text = "\(model.image.author)  \(model.image.date)"
+    descLabel.text = model.image.description
+    guard let url = model.image.url else { return }
+    
     if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) as? UIImage {
       articleImageView.image = cachedImage
     } else {
-      URLSession.shared.dataTask(with: url) { data, response, error in
-        guard let data = data, error == nil else { return }
+      model.getImageData(with: url) { data in
         DispatchQueue.main.async {
           let imageToCache = UIImage(data: data)?.resizeImage(with: CGSize(width: 101.0, height: 101.0))
           self.imageCache.setObject(imageToCache!, forKey: url.absoluteString as NSString)
           self.articleImageView.image = imageToCache
         }
-      }.resume()
+      }
     }
   }
 }

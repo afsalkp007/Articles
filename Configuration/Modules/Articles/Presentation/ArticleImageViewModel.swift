@@ -8,22 +8,13 @@
 import Foundation
 
 struct ArticleImageViewModel {
-  public let title: String
-  public let author: String
-  public let date: String
-  public let description: String
-  public let url: URL?
+  public let image: ArticleImage
 
   init(image: ArticleImage) {
-    self.title = image.title
-    self.author = image.author
-    self.date = Self.relativeDate(for: image.date)
-    self.description = image.description
-    self.url = image.url
+    self.image = image
   }
   
-  private static func relativeDate(
-    for date: Date,
+  func relativeDate(
     currentDate: Date = Date(),
     calendar: Calendar = .current,
     locale: Locale = .current
@@ -31,6 +22,13 @@ struct ArticleImageViewModel {
     let formatter = RelativeDateTimeFormatter()
     formatter.calendar = calendar
     formatter.locale = locale
-    return formatter.localizedString(for: date, relativeTo: currentDate)
+    return formatter.localizedString(for: image.date, relativeTo: currentDate)
+  }
+  
+  func getImageData(with url: URL, completion: @escaping (Data) -> Void) {
+    URLSession.shared.dataTask(with: url) { data, response, error in
+      guard let data = data, error == nil else { return }
+        completion(data)
+    }.resume()
   }
 }
