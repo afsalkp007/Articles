@@ -11,6 +11,10 @@ final class RemoteImageLoader: ImageLoader {
   private let url: URL
   private let client: HTTPClient
   
+  private enum Error: Swift.Error {
+    case connectivity
+  }
+  
   init(url: URL, client: HTTPClient) {
     self.url = url
     self.client = client
@@ -22,8 +26,8 @@ final class RemoteImageLoader: ImageLoader {
       case let .success((data, _)):
         completion(.success(data))
         
-      case let .failure(error):
-        completion(.failure(error))
+      case .failure:
+        completion(.failure(Error.connectivity))
       }
     }
   }

@@ -17,7 +17,6 @@ final class ArticlesTableViewCell: UITableViewCell {
     titleLabel.text = viewModel.image.title
     authorLabel.text = viewModel.image.author
     dateLabel.text = viewModel.relativeDate()
-    guard let url = viewModel.image.url else { return }
     
     getImage(from: viewModel)
   }
