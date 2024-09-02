@@ -89,8 +89,8 @@ class RemoteArticlesLoaderTests: XCTestCase {
     let url = URL(string: "http://any-url.com")!
     let resource = Resource(url: url)
     let sut = RemoteArticlesLoader(resource: resource, client: client)
-    trackForMemoryLeak(sut, file: file, line: line)
-    trackForMemoryLeak(client, file: file, line: line)
+    trackForMemoryLeaks(sut, file: file, line: line)
+    trackForMemoryLeaks(client, file: file, line: line)
     return (sut, client)
   }
   

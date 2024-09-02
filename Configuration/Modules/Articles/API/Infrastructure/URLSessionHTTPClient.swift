@@ -7,17 +7,14 @@
 
 import Foundation
 
-final class URLSessionHTTPClient: HTTPClient {
+public final class URLSessionHTTPClient: HTTPClient {
   private let session: URLSession
   
-  init(session: URLSession) {
+  public init(session: URLSession) {
     self.session = session
   }
   
-  private enum Error: Swift.Error {
-    case makeRequestFailed
-    case invalidData
-  }
+  private struct UnexpectedError: Error {}
 }
  
 extension URLSessionHTTPClient {
@@ -28,43 +25,29 @@ extension URLSessionHTTPClient {
       wrapper.cancel()
     }
   }
-  
-  func get(from resource: Resource, completion: @escaping (HTTPClient.Result) -> Void) -> HTTPClientTask? {
-    guard let request = makeRequest(resource: resource) else {
-      completion(.failure(Error.makeRequestFailed))
-      return nil
-    }
     
+  public func get(from resource: Resource, completion: @escaping (HTTPClient.Result) -> Void) -> HTTPClientTask? {
+    let request = makeRequest(resource: resource)
     let task = session.dataTask(with: request, completionHandler: { data, response, error in
-      guard let data = data, let response = response as? HTTPURLResponse, error == nil else {
-        completion(.failure(Error.invalidData))
-        return
+      if let error = error {
+        completion(.failure(error))
+      } else if let data = data, let response = response as? HTTPURLResponse {
+        completion(.success((data, response)))
+      } else {
+        completion(.failure(UnexpectedError()))
       }
-      
-      completion(.success((data, response)))
     })
     
     task.resume()
     return URLSessionTaskWrapper(wrapper: task)
   }
   
-  private func makeRequest(resource: Resource) -> URLRequest? {
+  private func makeRequest(resource: Resource) -> URLRequest {
     let url = resource.path.map { resource.url.appendingPathComponent($0) } ?? resource.url
-    guard var component = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
-      assertionFailure()
-      return nil
-    }
-    
-    component.queryItems = resource.parameters.map {
-      return URLQueryItem(name: $0, value: $1)
-    }
-    
-    guard let resolvedUrl = component.url else {
-      assertionFailure()
-      return nil
-    }
-    
-    var request = URLRequest(url: resolvedUrl)
+    var component = URLComponents(url: url, resolvingAgainstBaseURL: true)
+    component?.queryItems = resource.parameters.map { URLQueryItem(name: $0, value: $1) }
+        
+    var request = URLRequest(url: component?.url ?? url)
     request.httpMethod = resource.httpMethod.rawValue
     request.allHTTPHeaderFields = resource.headers
     return request

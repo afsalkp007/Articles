@@ -9,15 +9,11 @@ import Foundation
 
 public final class RemoteItemsMapper {
   public static func map(_ data: Data, _ response: HTTPURLResponse) throws -> [ArticleImage] {
-    do {
-      let decoder = JSONDecoder()
-      decoder.dateDecodingStrategy = decodeDate(with: "yyyy-MM-d H:mm:ss")
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = decodeDate(with: "yyyy-MM-d H:mm:ss")
 
-      let result = try decoder.decode(ArticlesResponse.self, from: data)
-      return result.results.toModels()
-    } catch {
-      throw RemoteArticlesLoader.Error.invalidData
-    }
+    let result = try decoder.decode(ArticlesResponse.self, from: data)
+    return result.results.toModels()
   }
   
   private static func decodeDate(with format: String) -> JSONDecoder.DateDecodingStrategy {
@@ -30,6 +26,15 @@ public final class RemoteItemsMapper {
 
 private struct ArticlesResponse: Decodable {
   let results: [RemoteArticleItem]
+  
+  enum CodingKeys: CodingKey {
+    case results
+  }
+  
+  init(from decoder: any Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    results = try container.decode([RemoteArticleItem].self, forKey: .results)
+  }
 }
 
 private struct RemoteArticleItem: Decodable {
@@ -49,13 +54,13 @@ private struct RemoteArticleItem: Decodable {
     case media
   }
   
-  init(from decoder: Decoder) throws {
+  init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    title = try container.decodeValue(forKey: .title)
-    byline = try container.decodeValue(forKey: .byline)
-    updated = try container.decodeValue(forKey: .updated)
-    abstract = try container.decodeValue(forKey: .abstract)
-    media = try container.decodeValue(forKey: .media)
+    title = try container.decode(String.self, forKey: .title)
+    byline = try container.decode(String.self, forKey: .byline)
+    updated = try container.decode(Date.self, forKey: .updated)
+    abstract = try container.decode(String.self, forKey: .abstract)
+    media = try container.decode([Media].self, forKey: .media)
   }
 }
 
@@ -66,9 +71,9 @@ private struct Media: Decodable {
     case metadata = "media-metadata"
   }
   
-  init(from decoder: Decoder) throws {
+  init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    metadata = try container.decodeValue(forKey: .metadata)
+    metadata = try container.decode([MetaData].self, forKey: .metadata)
   }
 }
 
@@ -79,9 +84,9 @@ private struct MetaData: Decodable {
     case url
   }
   
-  init(from decoder: Decoder) throws {
+  init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    url = try container.decodeValue(forKey: .url)
+    url = try container.decodeIfPresent(String.self, forKey: .url)
   }
 }
 

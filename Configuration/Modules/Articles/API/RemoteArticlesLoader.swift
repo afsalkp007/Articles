@@ -41,7 +41,7 @@ public final class RemoteArticlesLoader: ArticlesLoader {
       let items = try RemoteItemsMapper.map(data, response)
       return .success(items)
     } catch {
-      return .failure(error)
+      return .failure(Error.invalidData)
     }
   }
 }
