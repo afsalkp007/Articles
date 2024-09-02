@@ -49,6 +49,8 @@ class RemoteArticlesLoaderTests: XCTestCase {
   }
   
   func test_fetch_deliversItemsOn200HTTPResponseWithJSONItems() {
+    let (sut, client) = makeSUT()
+    
     let item1 = makeItem(
       title: "any title",
       author: "any author",
@@ -63,13 +65,20 @@ class RemoteArticlesLoaderTests: XCTestCase {
       description: "another description",
       url: URL(string: "http://another-url.com"))
     
-    let json = makeItemJSON(items: [item1.json, item2.json])
-    let result = try! RemoteItemsMapper.map(json, HTTPURLResponse(statusCode: 200))
+    let items = [item1.model, item2.model]
     
-    XCTAssertEqual(result, [item1.model, item2.model])
+    expect(sut, toCompleteWith: .success(items), when: {
+      let json = makeItemsJSON([item1.json, item2.json])
+      client.complete(withStatusCode: 200, data: json)
+    })
   }
   
   // MARK: - HTTPCientSpy
+  
+  private func makeItemsJSON(_ items: [[String: Any]]) -> Data {
+    let json = ["results": items]
+    return try! JSONSerialization.data(withJSONObject: json)
+  }
   
   private func makeSUT(
     url: URL = URL(string: "http://any-url.com")!,
