@@ -13,7 +13,7 @@ public final class RemoteItemsMapper {
       let decoder = JSONDecoder()
       decoder.dateDecodingStrategy = decodeDate(with: "yyyy-MM-d H:mm:ss")
 
-      let result = try decoder.decode(Articles.self, from: data)
+      let result = try decoder.decode(ArticlesResponse.self, from: data)
       return result.results.toModels()
     } catch {
       throw RemoteArticlesLoader.Error.invalidData
@@ -28,7 +28,7 @@ public final class RemoteItemsMapper {
   }
 }
 
-private struct Articles: Decodable {
+private struct ArticlesResponse: Decodable {
   let results: [RemoteArticleItem]
 }
 
