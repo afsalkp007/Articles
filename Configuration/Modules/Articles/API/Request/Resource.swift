@@ -10,14 +10,14 @@ import Foundation
 public struct Resource {
   public let url: URL
   public let path: String?
-  public let httpMethod: String
+  public let httpMethod: HTTPMethod
   public let parameters: [String: String]
   public let headers: [String: String]
   
   public init(
     url: URL,
     path: String? = nil,
-    httpMethod: String = "GET",
+    httpMethod: HTTPMethod = .GET,
     parameters: [String: String] = [:],
     headers: [String: String] = [:]
   ) {
@@ -27,4 +27,11 @@ public struct Resource {
     self.parameters = parameters
     self.headers = headers
   }
+}
+
+public enum HTTPMethod: String {
+  case GET = "GET"
+  case POST = "POST"
+  case PUT = "PUT"
+  case DELETE = "DELETE"
 }
